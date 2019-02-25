@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AssemblyName>RadarSoft.XmlaClient</AssemblyName>
+    <RootNamespace>RadarSoft.XmlaClient</RootNamespace>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>RadarSoft.snk</AssemblyOriginatorKeyFile>
+    <Authors>Radar-Soft</Authors>
+    <Company>Radar-Soft</Company>
+    <PackageLicenseUrl>https://github.com/RadarSoft/xmla-client/blob/master/LICENSE</PackageLicenseUrl>
+    <Copyright>Copyright © 2019 Radar-Soft</Copyright>
+    <PackageProjectUrl>https://github.com/RadarSoft/xmla-client</PackageProjectUrl>
+    <PackageIconUrl>https://www.radar-soft.com/favicon-32x32.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/RadarSoft/xmla-client</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageTags>netcore xmla olap radarcube radarsoft</PackageTags>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <Description>XMLA provider for a .NET Core OLAP client.
+Provides data access to any OLAP servers that support XMLA protocol and can be accessed over an HTTP connection.</Description>
+    <Version>1.0.0-beta</Version>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netcoreapp1.1\RadarSoft.XmlaClient.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="IXmlaCommand.cs" />
+    <Compile Remove="IXmlaConnection.cs" />
+    <Compile Remove="IXmlaDataAdapter.cs" />
+    <Compile Remove="Metadata\IMetadataObject.cs" />
+    <Compile Remove="Metadata\ISubordinateObject.cs" />
+    <Compile Remove="XmlaDataAdapter.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.Common" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\SimpleSOAPClient\src\SimpleSOAPClient\SimpleSOAPClient.csproj" />
+  </ItemGroup>
+
+</Project>
