@@ -19,7 +19,7 @@
     <PackageReleaseNotes></PackageReleaseNotes>
     <Description>XMLA provider for a .NET Core OLAP client.
 Provides data access to any OLAP servers that support XMLA protocol and can be accessed over an HTTP connection.</Description>
-    <Version>1.0.0-beta</Version>
+    <Version>1.0.0-alpha</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
