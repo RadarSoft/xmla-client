@@ -74,7 +74,7 @@ connection.Close();
 ## Execute CellSet
 ```csharp
 connection.Open();
-var mdx = "SELECT FROM [Analysis Services Tutorial] WHERE [Measures].[Internet Sales Count]";
+var mdx = "SELECT FROM [Adventure Works] WHERE [Measures].[Internet Sales Count]";
 var command = new XmlaCommand(mdx, connection);
 CellSet cellset = null;
 cellset = command.ExecuteCellSet();
