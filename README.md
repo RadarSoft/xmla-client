@@ -76,8 +76,7 @@ connection.Close();
 connection.Open();
 var mdx = "SELECT FROM [Adventure Works] WHERE [Measures].[Internet Sales Count]";
 var command = new XmlaCommand(mdx, connection);
-CellSet cellset = null;
-cellset = command.ExecuteCellSet();
+CellSet cellset = command.ExecuteCellSet();
 connection.Close();
  ```
 ## Approved OLAP servers
