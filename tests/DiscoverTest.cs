@@ -19,7 +19,7 @@ namespace UnitTest.XmlaClient.NetCore
 
             CubeDef cube = TestHelper.GetCube(connection);
 
-            var nsets = cube.NamedSets;
+            NamedSetCollection nsets = cube.NamedSets;
 
             connection.Close();
 
@@ -49,19 +49,20 @@ namespace UnitTest.XmlaClient.NetCore
 
             CubeDef cube = TestHelper.GetCube(connection);
 
-            var kpis = cube.Kpis;
+            KpiCollection kpis = cube.Kpis;
 
-            var meas = cube.Measures;
+            MeasureCollection meas = cube.Measures;
 
+            DimensionCollection dims = cube.Dimensions;
 
-            var dims = cube.Dimensions;
+            HierarchyCollection hiers = dims[0].Hierarchies;
 
-            var hiers = dims[0].Hierarchies;
+            LevelCollection levels = hiers[0].Levels;
 
-            var levels = hiers[0].Levels;
+            MemberCollection members = levels[1].GetMembers();
 
-            var members = levels[1].GetMembers();
-            var prop = members[0].MemberProperties.Find("PARENT_UNIQUE_NAME");
+            MemberProperty prop = members[0].MemberProperties.Find("PARENT_UNIQUE_NAME");
+
             Assert.IsTrue(!string.IsNullOrEmpty(prop.Value.ToString()));
 
             connection.Close();
@@ -128,7 +129,7 @@ namespace UnitTest.XmlaClient.NetCore
 
             CubeDef cube = TestHelper.GetCube(connection);
 
-            var mgroups = cube.MeasureGroups;
+            MeasureGroupCollection mgroups = cube.MeasureGroups;
 
             connection.Close();
 
