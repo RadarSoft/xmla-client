@@ -37,11 +37,8 @@ Provides data access to any OLAP servers that support XMLA protocol and can be a
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="SimpleSOAPClient" Version="2.1.0" />
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\SimpleSOAPClient\src\SimpleSOAPClient\SimpleSOAPClient.csproj" />
   </ItemGroup>
 
 </Project>
