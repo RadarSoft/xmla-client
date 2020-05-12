@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
     <AssemblyName>RadarSoft.XmlaClient</AssemblyName>
     <RootNamespace>RadarSoft.XmlaClient</RootNamespace>
     <SignAssembly>True</SignAssembly>
@@ -37,11 +37,11 @@ Provides data access to any OLAP servers that support XMLA protocol and can be a
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="SimpleSOAPClient" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\SimpleSOAPClient\src\SimpleSOAPClient\SimpleSOAPClient.csproj" />
-  </ItemGroup>
-
+  
 </Project>
