@@ -3,3 +3,5 @@
 /tests/bin
 /tests/obj
 /.idea
+/.vscode
+*.user
