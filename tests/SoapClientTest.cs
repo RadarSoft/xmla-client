@@ -17,30 +17,6 @@ namespace UnitTest.XmlaClient.NetCore
     [TestClass]
     public class SoapClientTest
     {
-        //[TestMethod]
-        //public void EnvelopeSerializationTest()
-        //{
-        //    bool assert = true;
-        //    var envelope = SoapEnvelope.Prepare().WithHeaders(new BeginSessionHeader());
-        //    try
-        //    {
-        //        using (var textWriter = new StringWriter())
-        //        using (var xmlWriter = XmlWriter.Create(textWriter))//, XmlWriterSettings))
-        //        {
-        //            new XmlSerializer(typeof(SoapEnvelope))
-        //                .Serialize(xmlWriter, envelope);//, XmlSerializerNamespaces);
-        //            Debug.WriteLine(textWriter.ToString());
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        assert = false;
-        //        Debug.WriteLine(e.Message);
-        //    }
-
-        //    Assert.IsTrue(assert);
-        //}
-
         [TestMethod]
         public void BuildEnvelopeHeaderTest()
         {

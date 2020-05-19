@@ -13,7 +13,7 @@ namespace UnitTest.XmlaClient.NetCore.AsyncTests
         public async Task ExecuteAsync()
         {
             bool assert = true;
-            var connection = new XmlaConnection("Data Source=http://localhost/OLAP/msmdpump.dll;Initial Catalog=Analysis Services Tutorial");
+            var connection = TestHelper.CreateConnectionToSsas();
             var command = new XmlaCommand("", connection);
             try
             {
@@ -29,11 +29,9 @@ namespace UnitTest.XmlaClient.NetCore.AsyncTests
         [TestMethod]
         public async Task ExecuteCellSetAsync()
         {
-            var connection = new XmlaConnection("Data Source=http://localhost/OLAP/msmdpump.dll;Initial Catalog=Analysis Services Tutorial");
+            var connection = TestHelper.CreateConnectionToSsas();
             await connection.OpenAsync();
-            //var statment = "SELECT FROM [Analysis Services Tutorial] WHERE [Measures].[Internet Sales Count]";
-            //var statment = "SELECT {HEAD(NONEMPTY({{[Product].[Category].[Category].ALLMEMBERS}}), 250000)} DIMENSION PROPERTIES MEMBER_TYPE ON 0 FROM [Analysis Services Tutorial] WHERE [Measures].[Internet Sales Count]";
-            var statment = "SELECT {HEAD(NONEMPTY({{[Product].[Category].&[4],[Product].[Category].&[1]}*{[Date].[Fiscal Year].[Fiscal Year].ALLMEMBERS}*{[Reseller Geography].[Country-Region].[Country-Region].ALLMEMBERS}}), 250000)} DIMENSION PROPERTIES MEMBER_TYPE ON 0 FROM [Analysis Services Tutorial] WHERE [Measures].[Internet Sales Count]";
+            var statment = TestHelper.TEST_CELLSET_COMMAND;
             var command = new XmlaCommand(statment, connection);
             CellSet cellset = null;
             cellset = await command.ExecuteCellSetAsync();
