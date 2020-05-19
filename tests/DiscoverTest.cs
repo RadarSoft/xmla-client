@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Xml.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RadarSoft.XmlaClient;
 using SimpleSOAPClient.Models;
@@ -69,7 +70,7 @@ namespace UnitTest.XmlaClient.NetCore
         }
 
         [TestMethod]
-        public void FineProperty()
+        public void FindProperty()
         {
             var connection = TestHelper.CreateConnectionToSsas();
             connection.Open();
@@ -157,7 +158,7 @@ namespace UnitTest.XmlaClient.NetCore
 
             //Debug.WriteLine(levels.Count());
 
-            var levels = cube.Dimensions.FindHierarchy("[Customer].[Customer Geography]")?
+            var levels = cube.Dimensions.FindHierarchy(TestHelper.TEST_HIERARCHY)?
                 .Levels;
 
             var memscols = levels.Select(x => x.GetMembers());
@@ -230,7 +231,7 @@ namespace UnitTest.XmlaClient.NetCore
             CubeDef cube = TestHelper.GetCube(connection);
 
             var dims = cube.Dimensions;
-            var hier = dims.FindHierarchy("[Customer].[Customer Geography]");
+            var hier = dims.FindHierarchy(TestHelper.TEST_HIERARCHY);
             Assert.IsTrue(hier != null);
             connection.Close();
         }
@@ -244,8 +245,8 @@ namespace UnitTest.XmlaClient.NetCore
 
 
             var actions = connection.GetActions(
-                "Analysis Services Tutorial",
-                "([Measures].[Internet Sales-Unit Price])",
+                TestHelper.TEST_CUBE_NAME,
+                "(TestHelper.TEST_MEASURE)",
                 CoordinateType.Cell
                 );
 
@@ -264,7 +265,7 @@ namespace UnitTest.XmlaClient.NetCore
 
             var dims = cube.Dimensions;
 
-            Assert.IsTrue(dims.Count == 13);
+            Assert.IsTrue(dims.Count > 0);
 
             connection.Close();
         }
@@ -272,7 +273,7 @@ namespace UnitTest.XmlaClient.NetCore
         [TestMethod]
         public void FindCube()
         {
-            string cubeName = "Analysis Services Tutorial";
+            string cubeName = TestHelper.TEST_CUBE_NAME;
             var connection = TestHelper.CreateConnectionToSsas();
             connection.Open();
 
@@ -294,10 +295,16 @@ namespace UnitTest.XmlaClient.NetCore
             try
             {
                 SoapEnvelope result = command.Execute() as SoapEnvelope;
+                var rows = result.GetXRows();
+                foreach (var r in rows)
+                {
+                    assert = assert && r.Elements().Where(e => e.Name.LocalName == "CUBE_NAME").Count() > 0;
+                }
                 connection.Close();
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 assert = false;
             }
             Assert.IsTrue(assert);

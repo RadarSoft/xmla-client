@@ -3,6 +3,12 @@
 Provides data access to any OLAP servers that support XMLA protocol and can be accessed over an HTTP connection.
 It is designed for development of an OLAP client in .NET Core applications that are completely independent of .NET Framework and therefore cannot use ADOMD.NET.
 
+## Testing
+To run the provided tests you must enter the specifics (datasource, username, password, etc) of your OLAP environment in `/tests/TestHelper.cs`. 
+
+**Please remember not to commit these to source control!**
+
+
 ## Connection
 ```csharp
 var connection = new XmlaConnection("Data Source=http://localhost/OLAP/msmdpump.dll;Initial Catalog=AdventureWorksDW2012Multidimensional-SE");
@@ -31,7 +37,7 @@ var connection = new XmlaConnection("Data Source=http://localhost/OLAP/msmdpump.
 connection.SessionID = sessionId;
 connection.Close();
  ``` 
-## Descover
+## Discover
 ```csharp
 connection.Open();
 var command = new XmlaCommand("MDSCHEMA_CUBES", connection);
@@ -79,11 +85,11 @@ var command = new XmlaCommand(mdx, connection);
 CellSet cellset = command.ExecuteCellSet();
 connection.Close();
  ```
-## Approved OLAP servers
+## Tested/Working OLAP servers
 
-* Microsoft Analysis Services (MD semantic model)
-* Mondrian
+* Microsoft Analysis Services (Multi-Dimensional semantic model)
 
-## Requirements
+## Notes on Mondrian:
+It is important to note that Mondrian does not implement the full XMLA (or MDX language) specification. 
 
-* .NET Core 2.2
+One of these gaps is that Mondrian does not handle authentication nor does it return a Session ID in the header. The current implementation of `xmla-client` requires a Session ID

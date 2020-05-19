@@ -10,16 +10,24 @@ namespace UnitTest.XmlaClient.NetCore
 {
     public static class TestHelper
     {
+        public const string TEST_DATASOURCE = "***MISSING***";
+        private const string TEST_USERNAME = "***MISSING***";
+        private const string TEST_PASSWORD = "***MISSING***";
+        
+        public const string TEST_CATALOG = "***MISSING***";
+        public const string TEST_CUBE_NAME = "***MISSING***";
+        public const string TEST_HIERARCHY = "***MISSING***";
+        public const string TEST_CELLSET_COMMAND = @"***MISSING***";
+
         public static XmlaConnection CreateConnectionToSsas(string sessionId = "")
         {
             SqlConnectionStringBuilder csBuilder = new SqlConnectionStringBuilder();
-            csBuilder.DataSource = "http://localhost/OLAP/msmdpump.dll";
-            csBuilder.InitialCatalog = @"Analysis Services Tutorial";
+            csBuilder.DataSource = TEST_DATASOURCE;
+            csBuilder.InitialCatalog = TEST_CATALOG;
             csBuilder.ConnectTimeout = 30;
-            //csBuilder.UserID = "sa";
-            //csBuilder.Password = "admin@123";
+            csBuilder.UserID = TEST_USERNAME;
+            csBuilder.Password = TEST_PASSWORD;
 
-            //Data Source=http://localhost/OLAP/msmdpump.dll;Initial Catalog="Analysis Services Tutorial";Connect Timeout=30
             string cs = csBuilder.ConnectionString;
 
             var connection = new XmlaConnection(cs);
@@ -30,12 +38,12 @@ namespace UnitTest.XmlaClient.NetCore
             return connection;
         }
 
-        public static CubeDef GetCube(XmlaConnection connection, string cubeName = "Analysis Services Tutorial")
+        public static CubeDef GetCube(XmlaConnection connection, string cubeName = TEST_CUBE_NAME)
         {
             return connection.Cubes.Find(cubeName);
         }
 
-        public static async Task<CubeDef> GetCubeAsync(XmlaConnection connection, string cubeName = "Analysis Services Tutorial")
+        public static async Task<CubeDef> GetCubeAsync(XmlaConnection connection, string cubeName = TEST_CUBE_NAME)
         {
             return await connection.Cubes.FindAsync(cubeName);
         }

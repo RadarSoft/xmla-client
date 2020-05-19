@@ -2,3 +2,6 @@
 /src/obj
 /tests/bin
 /tests/obj
+/.idea
+/.vscode
+*.user
